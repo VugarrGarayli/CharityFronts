@@ -1,0 +1,187 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h2>Könüllülər</h2>
+    <div class="add-button-container">
+      <button class="add-project-button" (click)="toggleForm()">
+        Əlavə Et
+      </button>
+    </div>
+  </div>
+  <div *ngIf="showForm" class="volunteer-form">
+    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Ad</label>
+        <input id="name" formControlName="name" placeholder="Ad" required />
+        <div
+          *ngIf="
+            volunteerForm.get('name')?.hasError('required') &&
+            volunteerForm.get('name')?.touched
+          "
+          class="error"
+        >
+          Ad tələb olunur.
+        </div>
+      </div>
+
+      <div>
+        <label for="surname">Soyad</label>
+        <input
+          id="surname"
+          formControlName="surname"
+          placeholder="Soyad"
+          required
+        />
+        <div
+          *ngIf="
+            volunteerForm.get('surname')?.hasError('required') &&
+            volunteerForm.get('surname')?.touched
+          "
+          class="error"
+        >
+          Soyad tələb olunur.
+        </div>
+      </div>
+
+      <div>
+        <label for="fathersName">Ata adı</label>
+        <input
+          id="fathersName"
+          formControlName="fathersName"
+          placeholder="Ata adı"
+        />
+      </div>
+
+      <div>
+        <label for="birthDate">Doğum tarixi</label>
+        <input type="date" id="birthDate" formControlName="birthDate" />
+      </div>
+
+      <div>
+        <label for="phoneNumber">Mobil nömrə</label>
+        <input
+          id="mobile"
+          formControlName="phoneNumber"
+          placeholder="Mobil nömrə"
+        />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" placeholder="Email" />
+      </div>
+
+      <div>
+        <label for="address">Ünvan</label>
+        <input id="address" formControlName="address" placeholder="Ünvan" />
+      </div>
+
+      <div class="form-group">
+        <label for="uploadFileId">Şəkil:</label>
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          accept="image/jpeg, image/png, image/jpg"
+          class="form-input-file"
+        />
+        <div
+          *ngIf="volunteerForm.get('uploadFileId')?.errors"
+          class="error-message"
+        >
+          <small>Şəkil faylı seçilməlidir.</small>
+        </div>
+        <div *ngIf="imagePreview" loading="lazy" class="image-preview">
+          <img
+            [src]="imagePreview"
+            alt="Image preview"
+            style="width: 100px; height: auto"
+          />
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="volunteerForm.invalid">Təsdiqlə</button>
+      <button type="button" class="cancel-btn" (click)="toggleForm()">
+        İmtina
+      </button>
+    </form>
+  </div>
+
+  <!-- Volunteer List -->
+  <div *ngIf="!showForm" class="volunteer-list">
+    <ul>
+      <li
+        *ngFor="let volunteer of volunteers; let i = index"
+        class="volunteer-item"
+      >
+        <div class="volunteer-image-container">
+          <img
+            [src]="getImageUrl(volunteer.fileUrl)"
+            alt="Volunteer Image"
+            class="volunteer-image"
+          />
+        </div>
+        <div class="volunteer-details">
+          <h3>{{ volunteer.name }} {{ volunteer.surname }}</h3>
+          <p>{{ volunteer.fathersName }}</p>
+        </div>
+        <div class="volunteer-actions">
+          <button class="details-button" (click)="openDetailModal(volunteer)">
+            Detallar
+          </button>
+          <button (click)="openEditForm(i)" class="btn-edit">Redaktə Et</button>
+          <button *ngIf="isAdmin" (click)="deleteVolunteer(i)" class="btn-delete">Sil</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page === 1">Əvvəlki</button>
+
+    <!-- Rəqəmli səhifələr -->
+    <button
+      *ngFor="let pageNum of paginationPages"
+      [class.active]="page === pageNum"
+      (click)="goToPage(pageNum)"
+    >
+      {{ pageNum }}
+    </button>
+
+    <button (click)="nextPage()" [disabled]="page === totalPages">
+      Sonrakı
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="model-overlay">
+  <div class="model-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Könüllü Məlumatları</h2>
+    <div *ngIf="selectedVolunteer?.fileUrl">
+      <img
+        [src]="getImageUrl(selectedVolunteer.fileUrl)"
+        alt="Volunteer Image"
+        class="modal-image"
+      />
+    </div>
+    <p><strong>Ad:</strong> {{ selectedVolunteer?.name }}</p>
+    <p><strong>Soyad:</strong> {{ selectedVolunteer?.surname }}</p>
+    <p><strong>Ata adı:</strong> {{ selectedVolunteer?.fathersName }}</p>
+    <p>
+      <strong>Doğum tarixi:</strong> {{ selectedVolunteer?.birthDate | date }}
+    </p>
+    <p><strong>Telefon:</strong> {{ selectedVolunteer?.phoneNumber }}</p>
+    <p><strong>Email:</strong> {{ selectedVolunteer?.email }}</p>
+    <p><strong>Ünvan:</strong> {{ selectedVolunteer?.address }}</p>
+  </div>
+</div>
+
+
+<div *ngIf="showConfirmation" class="custom-modal">
+  <div class="modal-contentt">
+    <h3>{{ confirmationMessage }}</h3>
+    <div class="button-group">
+      <button (click)="confirmAction(true)" class="confirm-btn">Bəli</button>
+      <button (click)="confirmAction(false)" class="cancel-btn">Xeyr</button>
+    </div>
+  </div>
+</div>

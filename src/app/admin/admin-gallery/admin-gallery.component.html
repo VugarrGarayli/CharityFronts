@@ -1,0 +1,81 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h2>Qalereya Şəkilləri</h2>
+    <div class="add-button-container">
+      <button class="add-project-button" (click)="toggleForm()">
+        Şəkil Əlavə Et
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showForm" class="modal-overlay" (click)="closeForm()">
+    <div class="modal-condent" (click)="$event.stopPropagation()">
+      <h3>Yeni Şəkil Yüklə</h3>
+      <form [formGroup]="galleryForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="image">Şəkil Seçin</label>
+          <input
+            type="file"
+            id="image"
+            (change)="onFileChange($event)"
+            formControlName="image"
+            accept="image/*"
+          />
+          <div *ngIf="imageError" class="error-message">{{ imageError }}</div>
+        </div>
+
+        <div *ngIf="previewUrl" class="image-preview">
+          <img [src]="previewUrl" alt="Şəkil önizləməsi" />
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="submit-button"
+            [disabled]="galleryForm.invalid"
+          >
+            Əlavə Et
+          </button>
+          <button type="button" class="cancel-button" (click)="closeForm()">
+            İmtina Et
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="gallery-images">
+    <div *ngFor="let gallery of galleries; let i = index" class="gallery-item">
+      <div class="image-card">
+        <img [src]="getImageUrl(gallery.fileUrl)" alt="Gallery Image" />
+        <button *ngIf="isAdmin" class="delete-button" (click)="deleteImage(i)">Sil</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page === 1">Əvvəlki</button>
+
+    <button
+      *ngFor="let pageNum of paginationPages"
+      [class.active]="page === pageNum"
+      (click)="goToPage(pageNum)"
+    >
+      {{ pageNum }}
+    </button>
+
+    <button (click)="nextPage()" [disabled]="page === totalPages">
+      Sonrakı
+    </button>
+  </div>
+
+  <div *ngIf="showConfirmation" class="custom-modal">
+    <div class="modal-contentt">
+      <h3>{{ confirmationMessage }}</h3>
+      <div class="button-group">
+        <button (click)="confirmAction(true)" class="confirm-btn">Bəli</button>
+        <button (click)="confirmAction(false)" class="cancel-btn">Xeyr</button>
+      </div>
+    </div>
+  </div>
+</div>

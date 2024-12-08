@@ -1,0 +1,38 @@
+<div class="dashboard-container">
+  <div class="panel-container">
+    <div *ngFor="let panel of panels" class="panel">
+      <div class="panel-header">
+        <h3>{{ panel.displayName }}</h3>
+        <button class="view-all-btn" (click)="togglePanel(panel)">View All</button>
+      </div>
+      <div *ngIf="panel.isOpen" class="panel-content">
+        <div class="panel-summary">
+          <div class="left">
+            <p>
+              Əlavə olunan {{ panel.displayName.toLowerCase() }}:
+              {{ panel.data?.totalDataCount || 0 }}
+            </p>
+          </div>
+          <div class="right">
+            <select
+              [(ngModel)]="selectedYear"
+              (change)="onYearChange(selectedYear, panel.name)"
+              class="year-select"
+            > 
+              <option *ngFor="let year of years" [value]="year">
+                 {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="panel-content">
+          <div class="chart-container">
+            <canvas id="{{ panel.name }}Chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,175 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h2>Layihələr</h2>
+    <div class="add-button-container">
+      <button class="add-project-button" (click)="openAddForm()">
+        Əlavə Et
+      </button>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="searchProjects()"
+      placeholder="Layihə başlığını axtar..."
+    />
+  </div>
+
+  <div class="project-list">
+    <div *ngIf="filteredProjects.length === 0" class="no-results">
+      <p>Belə bir layihə yoxdur</p>
+    </div>
+    <div
+      class="project-card"
+      *ngFor="let project of filteredProjects; let i = index"
+    >
+      <div class="project-header">
+        <h3>{{ project.header }}</h3>
+        <div class="options-icon" (click)="toggleOptions(i, $event)">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <div [class.active]="optionsVisible[i]" class="options-menu">
+          <button (click)="viewDetails(i)">Detallı baxış</button>
+          <button (click)="openEditForm(i)">Redaktə et</button>
+          <button *ngIf="isAdmin" (click)="deleteProject(i)">Sil</button>
+        </div>
+      </div>
+      <img
+        [src]="getImageUrl(project.fileUrl)"
+        alt="Project Image"
+        class="project-image"
+      />
+    </div>
+
+    <div class="project-form-popup" *ngIf="showForm">
+      <div class="popup-content">
+        <h3 class="popup-title">
+          {{
+            editingIndex !== null
+              ? "Layihəni Redaktə Et"
+              : "Yeni Layihə Əlavə Et"
+          }}
+        </h3>
+        <div class="project-form">
+          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="header">Başlıq:</label>
+              <input type="text" formControlName="header" class="form-input" />
+              <div
+                *ngIf="projectForm.get('header')?.errors"
+                class="error-message"
+              >
+                <small *ngIf="projectForm.get('header')?.errors?.['required']">
+                  Başlıq vacibdir.
+                </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="uploadFileId">Şəkil:</label>
+              <input
+                type="file"
+                (change)="onFileChange($event)"
+                accept="image/jpeg, image/png, image/jpg"
+                class="form-input-file"
+              />
+              <div
+                *ngIf="projectForm.get('uploadFileId')?.errors"
+                class="error-message"
+              >
+                <small>Şəkil faylı seçilməlidir.</small>
+              </div>
+              <div *ngIf="imagePreview" loading="lazy" class="image-preview">
+                <img
+                  [src]="imagePreview"
+                  alt="Image preview"
+                  style="width: 100px; height: auto"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="content">Məzmun:</label>
+              <textarea
+                id="content"
+                formControlName="content"
+                rows="5"
+                class="form-input-textarea"
+              ></textarea>
+              <div
+                *ngIf="projectForm.get('content')?.['required']"
+                class="error-message"
+              >
+                <small>Məzmun vacibdir.</small>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                class="submit-btn"
+                type="submit"
+                [disabled]="projectForm.invalid"
+              >
+                {{ editingIndex !== null ? "Yadda Saxla" : "Əlavə Et" }}
+              </button>
+              <button class="cancel-btn" type="button" (click)="onCancel()">
+                İmtina et
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="projects.length > 0" class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page === 1">Əvvəlki</button>
+
+    <button
+      *ngFor="let pageNum of paginationPages"
+      [class.active]="page === pageNum"
+      (click)="goToPage(pageNum)"
+    >
+      {{ pageNum }}
+    </button>
+
+    <button (click)="nextPage()" [disabled]="page === totalPages">
+      Sonrakı
+    </button>
+  </div>
+
+  <div *ngIf="showConfirmation" class="custom-modal">
+    <div class="modal-contentt">
+      <h3>{{ confirmationMessage }}</h3>
+      <div class="button-group">
+        <button (click)="confirmAction(true)" class="confirm-btn">Bəli</button>
+        <button (click)="confirmAction(false)" class="cancel-btn">Xeyr</button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="details-modal"
+    *ngIf="showDetailsModal"
+    (click)="closeDetailsModal()"
+  >
+    <div class="details-modal-content" (click)="$event.stopPropagation()">
+      <div class="details-modal-header">
+        <button class="close-btn" (click)="closeDetailsModal()">X</button>
+      </div>
+
+      <h2 class="details-modal-title">{{ currentProject?.header }}</h2>
+
+      <div class="details-modal-image">
+        <img [src]="getImageUrl(currentProject?.fileUrl)" alt="Layihə Şəkli" />
+      </div>
+
+      <div
+        class="details-modal-text"
+        [innerHTML]="currentProject?.content"
+      ></div>
+    </div>
+  </div>
+</div>

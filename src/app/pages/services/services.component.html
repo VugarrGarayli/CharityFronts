@@ -1,0 +1,68 @@
+<!-- Page Title -->
+<div class="page-nav no-margin row">
+  <div class="container">
+    <div class="row">
+      <h2>Layihələrimiz</h2>
+      <ul>
+        <li>
+          <a href="#"><i class="fas fa-home"></i> Ana Səhifə</a>
+        </li>
+        <li><i class="fas fa-angle-double-right"></i> Layihələrimiz</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!selectedEvent">
+  <div class="row event-container">
+    <div class="col-md-4 col-sm-6" *ngFor="let project of projects">
+      <div class="event-box">
+        <img [src]="project.fileUrl" alt="{{ project.header }}" />
+        <h4>{{ project.header }}</h4>
+        <p class="raises">
+          <!-- <span>Raised : ${{ project.raised }}</span> / ${{ project.goal }} -->
+        </p>
+        <p class="desic">{{ project.content | slice : 0 : 100 }}...</p>
+        <button class="btn btn-success btn-sm" (click)="selectEvent(project)">
+          Read More
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Details Page -->
+<div *ngIf="selectedEvent" class="container project-details">
+  <h2 class="event-title">{{ selectedEvent.header }}</h2>
+  <img
+    [src]="selectedEvent.fileUrl"
+    alt="{{ selectedEvent.header }}"
+    class="img-fluid event-image"
+  />
+  <div class="event-description">
+    {{ selectedEvent.content }}
+  </div>
+
+  <div class="join-us-section">
+    <p class="join-text">
+      <i>Əgər siz də bizə qoşulmaq istəyirsinizsə</i>
+    </p>
+    <div class="arrow">↓</div>
+    <a href="/help" class="btn btn-primary join-button"> Yardım et </a>
+  </div>
+</div>
+
+<div *ngIf="!selectedEvent" class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="page === 1">Əvvəlki</button>
+
+  <!-- Rəqəmli səhifələr -->
+  <button
+    *ngFor="let pageNum of paginationPages"
+    [class.active]="page === pageNum"
+    (click)="goToPage(pageNum)"
+  >
+    {{ pageNum }}
+  </button>
+
+  <button (click)="nextPage()" [disabled]="page === totalPages">Sonrakı</button>
+</div>

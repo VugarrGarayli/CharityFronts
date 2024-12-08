@@ -1,0 +1,58 @@
+.user-profile {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+  
+      strong {
+        color: #333;
+      }
+    }
+  
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+        color: white;
+      }
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      label {
+        margin: 10px 0 5px;
+        font-size: 14px;
+      }
+  
+      input {
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+  
+      button {
+        margin-top: 15px;
+      }
+    }
+  }
+  

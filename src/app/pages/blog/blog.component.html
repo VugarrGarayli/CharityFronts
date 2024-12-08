@@ -1,0 +1,44 @@
+<div class="page-nav no-margin row">
+    <div class="container">
+      <div class="row">
+        <h2>Bloqlar</h2>
+        <ul>
+          <li>
+            <a href="#"><i class="fas fa-home"></i> Ana Səhifə</a>
+          </li>
+          <li><i class="fas fa-angle-double-right"></i> Bloqlar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ################# Our Blog Starts Here#######################--->
+
+  <section class="our-blog" *ngIf="!selectedBlog">
+    <div class="container">
+      <div class="blog-row row">
+        <div class="col-md-4 col-sm-6" *ngFor="let blog of blogs">
+          <div class="single-blog">
+            <figure>
+              <img [src]="blog.fileUrl" alt="{{ blog.header }}" />
+            </figure>
+            <div class="blog-detail">
+              <small>{{ formatDate(blog.createdDate) }}</small>
+              <h4>{{ blog.header }}</h4>
+              <p>{{ blog.content | slice: 0:100 }}...</p>
+              <div class="link">
+                <button class="btn btn-success btn-sm" (click)="selectBlog(blog)">Read More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Blog Details Page -->
+  <section *ngIf="selectedBlog" class="container blog-details">
+    <h2 class="blog-title">{{ selectedBlog.header }}</h2>
+    <img [src]="selectedBlog.fileUrl" alt="{{ selectedBlog.header }}" class="img-fluid blog-image" />
+    <p class="blog-description">{{ selectedBlog.content }}</p>
+  </section>

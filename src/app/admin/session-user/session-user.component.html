@@ -1,0 +1,72 @@
+<div class="user-profile">
+  <h2>Şəxsi Kabinet</h2>
+
+  <!-- İstifadəçi məlumatları -->
+  <div *ngIf="userData; else loading">
+    <p><strong>Ad:</strong> {{ userData.name }}</p>
+    <p><strong>Soyad:</strong> {{ userData.surname }}</p>
+    <p><strong>Ata adı:</strong> {{ userData.fathersName }}</p>
+    <p><strong>Email:</strong> {{ userData.email }}</p>
+    <p><strong>Rolu:</strong> {{ userData.userRole }}</p>
+
+    <button (click)="editMode = true">Redaktə et</button>
+  </div>
+
+  <!-- Redaktə formu -->
+  <div *ngIf="editMode">
+    <form (ngSubmit)="updateUser()">
+      <label for="name">Ad:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="editData.name"
+        name="name"
+        required
+      />
+
+      <label for="surname">Soyad:</label>
+      <input
+        type="text"
+        id="surname"
+        [(ngModel)]="editData.surname"
+        name="surname"
+        required
+      />
+
+      <label for="fathersName">Ata adı:</label>
+      <input
+        type="text"
+        id="fathersName"
+        [(ngModel)]="editData.fathersName"
+        name="fathersName"
+        required
+      />
+
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="editData.email"
+        name="email"
+        required
+      />
+
+      <label for="password">Şifrə:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="editData.password"
+        name="password"
+        required
+      />
+
+      <button type="submit">Yadda saxla</button>
+      <button type="button" (click)="editMode = false">İmtina et</button>
+    </form>
+  </div>
+
+  <!-- Yüklənmə şablonu -->
+  <ng-template #loading>
+    <p>Məlumatlar yüklənir...</p>
+  </ng-template>
+</div>

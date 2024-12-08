@@ -1,0 +1,81 @@
+.about-us {
+  background-color: #edf1f5;
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .about-us {
+    padding: 30px 10px;
+  }
+}
+.about-us .natur-row {
+  margin-top: 20px;
+}
+.about-us .text-part h2 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+.about-us .text-part p {
+  text-indent: 20px;
+  margin-bottom: 15px;
+  line-height: 27px;
+  font-weight: 500;
+  text-align: justify;
+  font-size: 0.9rem;
+}
+.about-us .image-part .about-quick-box .about-qcard {
+  padding: 50px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35),
+    0 0px 3px 0 rgba(206, 206, 238, 0.35);
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.about-us .image-part .about-quick-box .about-qcard p {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.about-us .image-part .about-quick-box .about-qcard i {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  color: #3cc88f;
+}
+.about-us .image-part .about-quick-box .about-qcard .red {
+  color: #ff6b70;
+}
+.about-us .image-part .about-quick-box .about-qcard .yell {
+  color: #f7a900;
+}
+.about-us .image-part .about-quick-box .about-qcard .blu {
+  color: #21d7d9;
+}
+.brder img {
+  border-radius: 25px;
+}
+
+.mission-vision {
+  background-color: #fff;
+}
+.mission-vision .mission {
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .mission-vision .mission {
+    padding: 30px 10px;
+  }
+}
+.mission-vision .vision {
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .mission-vision .vision {
+    padding: 30px 10px;
+  }
+}
+.mission-vision .mv-det {
+  margin: auto;
+}
+.fonts {
+  font-family: "Platypi Medium 500";
+}

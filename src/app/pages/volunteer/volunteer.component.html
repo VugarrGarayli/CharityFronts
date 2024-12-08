@@ -1,0 +1,111 @@
+<div class="page-nav no-margin row">
+  <div class="container">
+    <div class="row">
+      <h2>Könüllü Ol</h2>
+      <ul>
+        <li>
+          <a href="#"><i class="fas fa-home"></i> Bizə qoşul</a>
+        </li>
+        <li><i class="fas fa-angle-double-right"></i> Könüllü Ol</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<section class="our-blog">
+  <div class="form-volunteer">
+    <h2>Bizimlə Əlaqə</h2>
+    <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+      <label>Ad:</label>
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Adınızı daxil edin"
+      />
+      <div
+        *ngIf="
+          volunteerForm.get('name')?.invalid &&
+          volunteerForm.get('name')?.touched
+        "
+      >
+        Ad düzgün daxil edilməlidir.
+      </div>
+
+      <label>Soyad:</label>
+      <input
+        formControlName="surname"
+        type="text"
+        placeholder="Soyadınızı daxil edin"
+      />
+      <div
+        *ngIf="
+          volunteerForm.get('surname')?.invalid &&
+          volunteerForm.get('surname')?.touched
+        "
+      >
+        Soyad düzgün daxil edilməlidir.
+      </div>
+
+      <label>Atanın adı:</label>
+      <input
+        formControlName="fathersName"
+        type="text"
+        placeholder="Atanızın adını daxil edin"
+      />
+
+      <label>Doğum tarixi:</label>
+      <input formControlName="birthDate" type="date" />
+
+      <label>Telefon nömrəsi:</label>
+      <input
+        formControlName="phoneNumber"
+        type="tel"
+        placeholder="+994XXXXXXXXX"
+      />
+      <div
+        *ngIf="
+          volunteerForm.get('phoneNumber')?.invalid &&
+          volunteerForm.get('phoneNumber')?.touched
+        "
+      >
+        Telefon nömrəsi düzgün daxil edilməlidir.
+      </div>
+
+      <label>E-mail:</label>
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="E-mail ünvanınızı daxil edin"
+      />
+      <div
+        *ngIf="
+          volunteerForm.get('email')?.invalid &&
+          volunteerForm.get('email')?.touched
+        "
+      >
+        E-mail düzgün daxil edilməlidir.
+      </div>
+
+      <label>Ünvan:</label>
+      <textarea
+        formControlName="address"
+        placeholder="Ünvanınızı daxil edin"
+      ></textarea>
+
+      <label>Şəkil:</label>
+      <input type="file" (change)="onFileChange($event)" class="file-input" />
+      <div *ngIf="imagePreview" class="image-preview-container">
+        <img [src]="imagePreview" alt="Şəkil ön baxışı" />
+      </div>
+
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? "Göndərilir..." : "Göndər" }}
+      </button>
+    </form>
+
+    <app-notification
+      *ngIf="showNotification"
+      [message]="notificationMessage"
+      (notificationClosed)="showNotification = false"
+    ></app-notification>
+  </div>
+</section>

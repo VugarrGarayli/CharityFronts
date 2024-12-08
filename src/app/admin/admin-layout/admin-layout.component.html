@@ -1,0 +1,107 @@
+<div class="top-panel" [ngClass]="{ 'dark-mode': isDarkMode }">
+  <img
+    *ngIf="isCollapsed"
+    src="assets/images/logo2.png"
+    alt="Logo"
+    class="logo-icon"
+  />
+  <div *ngIf="!isCollapsed" class="logo-text">Qayğı</div>
+
+  <div #hamburger class="hamburger" (click)="toggleSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search" />
+  </div>
+
+  <button class="toggle-theme" (click)="toggleTheme()">
+    {{ isDarkMode ? "🌞" : "🌙" }}
+  </button>
+
+  <div
+    class="profile"
+    (click)="toggleUserMenu()"
+    [class.open]="isUserMenuOpen"
+    (mouseleave)="closeUserMenu()"
+    (mouseenter)="cancelCloseMenu()"
+  >
+    <img src="https://via.placeholder.com/40" alt="Profile Image" />
+    <div class="user-menu">
+      <span (click)="changePassword()">Şifrəni dəyiş</span>
+      <span routerLink="/admin/user-profile">Şəxsi Kabinet</span>
+      <span routerLink="/admin-login" (click)="signOut()">Hesabdan çıx</span>
+    </div>
+  </div>
+
+  <app-notification
+    *ngIf="showNotification"
+    [message]="notificationMessage"
+    (notificationClosed)="showNotification = false"
+  ></app-notification>
+</div>
+
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar" [class.collapsed]="isCollapsed">
+    <div class="menu-item" routerLink="/admin" routerLinkActive="active">
+      <img src="assets/admin/dashboard/dashboard.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">İdarə Paneli</span>
+    </div>
+
+    <div
+      class="menu-item"
+      routerLink="/admin/projects"
+      routerLinkActive="active"
+    >
+      <img src="assets/admin/dashboard/projects.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">Layihələr</span>
+    </div>
+
+    <div class="menu-item" routerLink="/admin/blogs" routerLinkActive="active">
+      <img src="assets/admin/dashboard/blogs.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">Bloqlar</span>
+    </div>
+
+    <div
+      class="menu-item"
+      routerLink="/admin/gallery"
+      routerLinkActive="active"
+    >
+      <img src="assets/admin/dashboard/gallery.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">Qalereya</span>
+    </div>
+
+    <div
+      class="menu-item"
+      routerLink="/admin/admin-volunteers"
+      routerLinkActive="active"
+    >
+      <img src="assets/admin/dashboard/volunteers.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">Könüllülər</span>
+    </div>
+
+    <div
+      class="menu-item"
+      routerLink="/admin/help-requests"
+      routerLinkActive="active"
+    >
+      <img src="assets/admin/dashboard/list.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">Yardım siyahısı</span>
+    </div>
+
+    <div
+      class="menu-item"
+      routerLink="/admin/admin-pages"
+      routerLinkActive="active"
+    >
+      <img src="assets/admin/dashboard/admin.png" class="menu-icon" />
+      <span *ngIf="!isCollapsed">İstifadəçilər</span>
+    </div>
+  </div>
+</div>
+
+<div class="main-content" [class.collapsed]="isCollapsed">
+  <router-outlet></router-outlet>
+</div>

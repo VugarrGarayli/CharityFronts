@@ -1,0 +1,190 @@
+<header class="continer-fluid">
+  <div class="header-top">
+    <div class="container">
+      <div class="row col-det">
+        <div class="col-lg-6 d-none d-lg-block">
+          <ul class="ulleft">
+            <li>
+              <i class="fas fa-phone-volume"></i>
+              +994704916566
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 folouws">
+          <ul class="ulright">
+            <li><small>Bizi izləyin </small>:</li>
+            <li>
+              <img
+                width="24"
+                height="24"
+                src="https://img.icons8.com/fluency/48/facebook.png"
+                alt="facebook"
+              />
+            </li>
+            <li>
+              <img
+                width="24"
+                height="24"
+                src="https://img.icons8.com/ios/50/twitterx--v1.png"
+                alt="twitterx--v1"
+              />
+            </li>
+            <li>
+              <img
+                width="27"
+                height="27"
+                src="https://img.icons8.com/fluency/48/instagram-new.png"
+                alt="instagram-new"
+              />
+            </li>
+            <li>
+              <img
+                width="27"
+                height="27"
+                src="https://img.icons8.com/fluency/48/linkedin.png"
+                alt="linkedin"
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 btn-bhed">
+          <button
+            class="btn btn-sm btn-success"
+            (click)="openModal()"
+            id="join-us-button"
+          >
+            Bizə qoşul
+          </button>
+          <div class="modal" [ngClass]="{ show: showModal }">
+            <div class="modal-content">
+              <span class="close" (click)="closeModal()">&times;</span>
+              <div class="logo-container">
+                <img src="/assets/images/logo2.png" alt="Site Logo" />
+              </div>
+              <a class="a-modal" href="/volunteer">
+                <button class="modal-button" id="volunteerButton">
+                  Könüllü Ol
+                </button>
+              </a>
+
+              <button class="modal-button" id="helpButton">Yardım et</button>
+            </div>
+          </div>
+          <button
+            class="btn btn-sm btn-default"
+            id="openFormBtn"
+            (click)="openForm()"
+          >
+            Yardım al
+          </button>
+          <div class="form-popup" [ngClass]="{ open: showForm }">
+            <div class="form-container">
+              <span (click)="closeForm()" class="close-btn">&times;</span>
+              <h2>Yardım Al</h2>
+              <form
+                [formGroup]="helpRequestForm"
+                (ngSubmit)="postHelpRequest()"
+              >
+                <label for="name">Ad:</label>
+                <input type="text" id="name" formControlName="name" />
+
+                <label for="surname">Soyad:</label>
+                <input type="text" id="surname" formControlName="surname" />
+
+                <label for="fathersName">Atanın Adı:</label>
+                <input
+                  type="text"
+                  id="fathersName"
+                  formControlName="fathersName"
+                />
+
+                <label for="phoneNumber">Əlaqə Nömrəsi:</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  formControlName="phoneNumber"
+                />
+
+                <label for="region">Region</label>
+                <select
+                  formControlName="regionId"
+                  (change)="onRegionChange($event)"
+                >
+                  <option value="">Region Seçin</option>
+                  <option *ngFor="let region of regions" [value]="region.id">
+                    {{ region.name }}
+                  </option>
+                </select>
+
+                <label for="address">Ünvan:</label>
+                <input type="text" id="address" formControlName="address" />
+
+                <label for="shortInfo">Qısa Məlumat:</label>
+                <input type="text" id="shortInfo" formControlName="shortInfo" />
+
+                <button type="submit">Yardım İstəyi Göndər</button>
+              </form>
+            </div>
+            <div *ngIf="showConfirmation" class="custom-modal">
+              <div class="modal-contentt">
+                <h3>{{ confirmationMessage }}</h3>
+                <div class="button-group">
+                  <button (click)="confirmAction(true)" class="confirm-btn">
+                    Bəli
+                  </button>
+                  <button (click)="confirmAction(false)" class="cancel-btn">
+                    Xeyr
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="menu-jk" class="header-bottom">
+    <div class="container">
+      <div class="row nav-row">
+        <div class="col-lg-3 col-md-12 logo">
+          <a routerLink="/home">
+            <img src="assets/images/logo2.png" style="height: 65px" />
+            <a data-toggle="collapse" data-target="#menu" href="#menu"
+              ><i class="fas d-block d-lg-none small-menu fa-bars"></i
+            ></a>
+          </a>
+        </div>
+        <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
+          <ul class="navbad">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Ana Səhifə </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/about-us" href="">Haqqımızda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/services">Layihələrimiz</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/gallery">Qalereya</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/blog">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact-us">Əlaqə</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-notification
+    *ngIf="showNotification"
+    [message]="notificationMessage"
+    (notificationClosed)="showNotification = false"
+  ></app-notification>
+</header>

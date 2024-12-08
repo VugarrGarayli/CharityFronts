@@ -1,0 +1,158 @@
+/* Styling for the event list page */
+html {
+  scroll-behavior: smooth;
+}
+.event-container {
+  padding: 50px 0;
+}
+.event-box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Set a fixed height for images */
+.event-box img {
+  max-width: 100%;
+  height: 150px; /* Set a fixed height for images */
+  object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  margin-bottom: 15px;
+}
+.event-description {
+  font-size: 16px; /* Mətnin ölçüsünü tənzimləyin */
+  line-height: 1.6; /* Mətnin sətirlərarası məsafəsini artırın */
+  color: #333; /* Mətnin rəngi */
+  white-space: pre-wrap; /* Boşluqları və yeni sətirləri qoruyun */
+  word-wrap: break-word; /* Kəskin kəsilmə problemlərini aradan qaldırın */
+}
+
+/* Constrain the height of the description */
+.event-box .desic {
+  font-size: 13px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  height: 60px; /* Set a fixed height for the description text */
+}
+
+/* Ensure the button is always at the bottom of the box */
+.event-box .btn {
+  margin-top: auto;
+}
+
+.raised {
+  font-weight: bold;
+}
+
+/* Styling for the event details page */
+.project-details {
+  background-color: #f8f9fa;
+  padding: 50px 20px;
+  text-align: center;
+}
+.project-details.ng-star-inserted {
+  opacity: 1;
+}
+.event-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.event-image {
+  width: 100%;           /* Şəkilin eni ekranın 100%-i olacaq */
+  max-width: 400px;      /* Şəkilin maksimum eni 400px olacaq */
+  height: auto;          /* Hündürlük avtomatik olaraq nisbətə uyğun gələcək */
+  margin: 20px auto;     /* Şəkil mərkəzləşdiriləcək */
+  display: block;        /* Block səviyyəsində göstəriləcək */
+}
+
+.event-description {
+  padding: 0 20px;
+  text-align: justify;
+  margin-top: 20px;
+}
+
+.btn-success {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Styling for the Join Us Section */
+.join-us-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.join-text {
+  font-style: italic;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.join-button {
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.arrow {
+  font-size: 24px;
+  margin-top: 10px;
+  animation: bounce 2s infinite;
+}
+
+/* Animation for the arrow pointing downwards */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.pagination-controls button {
+  background-color: #4b49ac;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+  
+}
+
+.pagination-controls button:hover {
+  background-color: #3a378a;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

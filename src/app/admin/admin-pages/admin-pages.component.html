@@ -1,0 +1,155 @@
+<div class="projects-container">
+  <!-- Başlıq hissəsi: İstifadəçilər və Əlavə Et düyməsi -->
+  <div class="header">
+    <h3>İstifadəçilər</h3>
+    <button class="btn btn-success" (click)="toggleForm()">Əlavə Et</button>
+  </div>
+  <div class="filter-panel">
+    <input
+      type="text"
+      id="searchInput"
+      [(ngModel)]="searchTerm"
+      class="form-control"
+      placeholder="Ad və Soyad üzrə axtarış et..."
+      (input)="applyFilter()"
+    />
+  </div>
+
+  <!-- "İstifadəçi yoxdur" mesajı -->
+
+  <div *ngIf="isFormVisible" class="custom-form-container">
+    <div class="form-content">
+      <button class="close-btn" (click)="toggleForm()">X</button>
+
+      <form
+        (ngSubmit)="onSubmit(moderatorForm)"
+        #moderatorForm="ngForm"
+        class="custom-form"
+      >
+        <div class="form-header">
+          <h2>
+            {{
+              selectedUserIndex !== null
+                ? "İstifadəçini Redaktə Et"
+                : "İstifadəçi Əlavə Et"
+            }}
+          </h2>
+        </div>
+
+        <div class="custom-form-group">
+          <label for="firstName">Ad</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            name="firstName"
+            [(ngModel)]="firstName"
+            required
+          />
+        </div>
+
+        <div class="custom-form-group">
+          <label for="lastName">Soyad</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            name="lastName"
+            [(ngModel)]="lastName"
+            required
+          />
+        </div>
+
+        <div class="custom-form-group">
+          <label for="fathersName">Ata Adı</label>
+          <input
+            type="text"
+            id="fathersName"
+            class="form-control"
+            name="fathersName"
+            [(ngModel)]="fathersName"
+            required
+          />
+        </div>
+
+        <div class="custom-form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="email"
+            required
+          />
+        </div>
+
+        <div class="custom-form-group">
+          <label for="role">Rol</label>
+          <select
+            id="role"
+            class="form-control"
+            name="role"
+            [(ngModel)]="role"
+            required
+          >
+            <option value="admin">Admin</option>
+            <option value="moderator">Moderator</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!moderatorForm.form.valid"
+        >
+          {{ selectedUserIndex !== null ? "Yadda Saxla" : "Əlavə Et" }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="users-table">
+    <div *ngIf="filteredUsers && filteredUsers.length > 0; else noUsers">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Ata adı</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Əməliyyat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers; let i = index">
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.fathersName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.userRole === 1 ? "Admin" : "Moderator" }}</td>
+            <td class="actions">
+              <button class="btn btn-warning" (click)="editUser(i)">
+                Redaktə Et
+              </button>
+              <button
+              *ngIf="isAdmin"
+                class="btn btn-danger"
+                (click)="onDelete(user.id)"
+                title="İstifadəçini sil"
+              >
+                Sil
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Əgər istifadəçi yoxdursa, bu mesaj göstəriləcək -->
+    <ng-template #noUsers>
+      <div class="no-users">İstifadəçi yoxdur.</div>
+    </ng-template>
+  </div>
+</div>

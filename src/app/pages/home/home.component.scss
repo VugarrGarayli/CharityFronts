@@ -1,0 +1,304 @@
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel {
+  max-width: 100%;
+  margin: auto;
+  height: 50px;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%; /* Resize this as needed */
+  max-width: 600px; /* Optional: max width for large screens */
+}
+
+h3.title {
+  font-size: 3rem; /* Larger size */
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.animated {
+  align-items: center;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+
+.delay-1s {
+  animation-delay: 1s;
+}
+
+.delay-2s {
+  animation-delay: 2s;
+}
+
+.about-us {
+  background-color: #edf1f5;
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .about-us {
+    padding: 30px 10px;
+  }
+}
+.about-us .natur-row {
+  margin-top: 20px;
+}
+.about-us .text-part h2 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+.about-us .text-part p {
+  text-indent: 20px;
+  margin-bottom: 15px;
+  line-height: 27px;
+  font-weight: 500;
+  text-align: justify;
+  font-size: 0.9rem;
+}
+.stles {
+  text-align: justify;
+}
+.about-us .image-part .about-quick-box .about-qcard {
+  padding: 50px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35),
+    0 0px 3px 0 rgba(206, 206, 238, 0.35);
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.about-us .image-part .about-quick-box .about-qcard p {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.about-us .image-part .about-quick-box .about-qcard i {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  color: #3cc88f;
+}
+.about-us .image-part .about-quick-box .about-qcard .red {
+  color: #ff6b70;
+}
+.about-us .image-part .about-quick-box .about-qcard .yell {
+  color: #f7a900;
+}
+.about-us .image-part .about-quick-box .about-qcard .blu {
+  color: #21d7d9;
+}
+
+/* ===================================== Events Home CSS ================================== */
+.events {
+  background-color: #efefef2e;
+  padding: 50px;
+}
+
+@media screen and (max-width: 940px) {
+  .events {
+    padding: 30px 10px;
+  }
+}
+.events .event-ro .event-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.events .event-ro .event-box img {
+  margin-bottom: 20px;
+  width: 300px; /* Eyni genişlik */
+  height: 200px; /* Eyni hündürlük */
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.events .event-ro .event-box h4 {
+  font-size: 18px;
+}
+
+.events .event-ro .event-box .raises {
+  margin-bottom: 10px;
+}
+
+.events .event-ro .event-box .raises span {
+  color: #71b61b;
+}
+
+.events .event-ro .event-box .desic {
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+/* ===================================== Mission Vision CSS ================================== */
+.mission-vision {
+  background-color: #fff;
+}
+.mission-vision .mission {
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .mission-vision .mission {
+    padding: 30px 10px;
+  }
+}
+.mission-vision .vision {
+  padding: 50px;
+}
+@media screen and (max-width: 940px) {
+  .mission-vision .vision {
+    padding: 30px 10px;
+  }
+}
+.mission-vision .mv-det {
+  margin: auto;
+}
+.brder img {
+  border-radius: 25px;
+}
+
+/* ===================================== Charity Number CSS ================================== */
+.doctor-message {
+  // background-image: url("../images/slider/slider-2.jpg");
+  background-image: url("/public/assets/images/slider/slider-2.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+.doctor-message .session-title h2 {
+  color: #fff;
+  font-family: "Platypi Medium 500";
+}
+
+.doctor-message .inner-lay {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 50px;
+  color: #fff;
+}
+
+@media screen and (max-width: 940px) {
+  .doctor-message .inner-lay {
+    padding: 30px 10px;
+  }
+}
+.doctor-message .inner-lay .numb {
+  text-align: center;
+  padding: 30px;
+}
+
+.doctor-message .inner-lay .numb h3 {
+  font-size: 42px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* ===================================== Our Blog CSS ================================== */
+.our-blog {
+  background-color: #fdfdfd;
+  padding: 40px;
+}
+
+@media screen and (max-width: 967px) {
+  .our-blog {
+    padding: 30px 0px;
+  }
+}
+.our-blog .single-blog {
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65),
+    0 2px 6px 0 rgba(206, 206, 238, 0.54);
+}
+
+.our-blog .single-blog figure {
+  margin-bottom: 5px;
+}
+
+.our-blog .single-blog .blog-detail {
+  padding: 15px;
+}
+
+.our-blog .single-blog small {
+  color: #71b61b;
+  font-size: 12px;
+}
+
+.our-blog .single-blog h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.our-blog .single-blog p {
+  text-align: justify;
+  text-indent: 20px;
+}
+
+.our-blog .single-blog .link a {
+  font-size: 12px;
+  color: #71b61b;
+}
+
+.our-blog .single-blog .link i {
+  padding-top: 6px;
+  margin-left: 5px;
+  color: #ffffff;
+}
+.subtitle {
+  font-family: "Regular 400 Italic";
+  font-size: 20px;
+}
+
+.fonts {
+  font-family: "Platypi Medium 500";
+}

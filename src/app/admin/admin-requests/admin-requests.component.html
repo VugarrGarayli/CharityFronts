@@ -1,0 +1,77 @@
+<div class="help-requests-container">
+  <h2 class="help-requests-title">Yardım İstəkləri</h2>
+
+  <table class="help-requests-table">
+    <thead>
+      <tr>
+        <th>Ad, Soyad</th>
+        <th>Əlaqə nömrəsi</th>
+        <th>Region</th>
+        <th>Əməliyyatlar</th>
+        <th>Yekun</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of paginatedRequests">
+        <td>{{ request.name }} {{ request.surname }}</td> <!-- Ad və soyad birləşdirilib -->
+        <td>{{ request.phoneNumber }}</td> <!-- Telefon nömrəsi -->
+        <td>{{ request.region?.name || 'Bilinmir' }}</td> <!-- Region adı (obyektin içində 'name' sahəsi varsa) -->
+        <td>
+          <button class="detail-btn" (click)="showDetails(request)">
+            Detallar
+          </button>
+          <button *ngIf="isAdmin" class="delete-btn" (click)="deleteRequest(request)">
+            Sil
+          </button>
+        </td>
+        <td class="complete-cell">
+          <input
+            type="checkbox"
+            [checked]="request.completed"
+            (change)="toggleComplete(request)"
+          />
+          <span *ngIf="request.completed" class="checkmark">✓</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination-controls">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+      Əvvəlki
+    </button>
+    <span>Səhifə {{ currentPage }}</span>
+    <button
+      (click)="goToPage(currentPage + 1)"
+      [disabled]="currentPage * itemsPerPage >= helpRequests.length"
+    >
+      Növbəti
+    </button>
+  </div>
+</div>
+
+<!-- Detallar Modalı -->
+<div *ngIf="selectedRequest" class="modal">
+  <div class="modal-contents">
+    <span class="close" (click)="closeDetails()">&times;</span>
+    <h2 class="modal-title">{{ selectedRequest?.name }} Məlumatları</h2>
+    <div class="modal-body">
+      <p><strong>Ad, Soyad:</strong> {{ selectedRequest?.name }} {{ selectedRequest?.surname }}</p>
+      <p><strong>Ata adı</strong> {{ selectedRequest?.fathersName }}</p>
+      <p><strong>Əlaqə nömrəsi:</strong> {{ selectedRequest?.phoneNumber }}</p>
+      <p><strong>Region:</strong> {{ selectedRequest?.region?.name || 'Bilinmir' }}</p>
+      <p><strong>Ünvan:</strong> {{ selectedRequest?.address }}</p>
+      <p><strong>Qısa məlumat:</strong> {{ selectedRequest?.shortInfo }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showConfirmation" class="custom-modal">
+  <div class="modal-contentt">
+    <h3>{{ confirmationMessage }}</h3>
+    <div class="button-group">
+      <button (click)="confirmAction(true)" class="confirm-btn">Bəli</button>
+      <button (click)="confirmAction(false)" class="cancel-btn">Xeyr</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+.our-blog {
+  background-color: #fdfdfd;
+  padding: 40px;
+
+  @media screen and (max-width: 967px) {
+    padding: 30px 0px;
+  }
+
+  .single-blog {
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65),
+      0 2px 6px 0 rgba(206, 206, 238, 0.54);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 380px; /* Sabit hündürlük */
+    
+  }
+
+  figure {
+    margin-bottom: 5px;
+    height: 200px;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-detail {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  small {
+    color: #71b61b;
+    font-size: 12px;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap; /* Mətnin uzanmasının qarşısını alır */
+    overflow: hidden; /* Uzanan mətni gizlədir */
+    text-overflow: ellipsis; /* Mətni sonlandırır (...) */
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+
+    a {
+      font-size: 12px;
+      color: #71b61b;
+    }
+
+    i {
+      padding-top: 6px;
+      margin-left: 5px;
+      color: #ffffff;
+    }
+  }
+}
+
+.blog-details {
+  padding: 20px; /* Ümumi padding */
+
+  .blog-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center; /* Başlığı ortala */
+  }
+
+  .blog-image {
+    width: 100%; /* Şəkilin eni ekranın 100%-i olacaq */
+    max-width: 400px; /* Şəkilin maksimum eni 400px olacaq */
+    height: auto; /* Hündürlük avtomatik olaraq nisbətə uyğun gələcək */
+    margin: 20px auto; /* Şəkil mərkəzləşdiriləcək */
+    display: block; /* Block səviyyəsində göstəriləcək */
+  }
+
+  .blog-description {
+    padding: 0 20px;
+    text-align: justify;
+    margin-top: 20px;
+    font-size: 16px; /* Mətnin ölçüsünü tənzimləyin */
+    line-height: 1.6; /* Mətnin sətirlərarası məsafəsini artırın */
+    color: #333; /* Mətnin rəngi */
+    white-space: pre-wrap; /* Boşluqları və yeni sətirləri qoruyun */
+    word-wrap: break-word; /* Kəskin kəsilmə problemlərini aradan qaldırın */
+  }
+}
+
+.btn {
+  &.btn-success {
+    background-color: #28a745;
+    border: none;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+}
